@@ -1,38 +1,109 @@
-.App {
+html,
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+body {
+  font-family: Cambria, Cochin, Georgia, Times, "Times New Roman", serif;
+  background-color: #6c816d;
+  width: 100vw;
+  height: 100vh;
+  padding-top: 20px;
+}
+
+/* Slideshow */
+
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 500px;
+}
+
+.slideshowSlider {
+  white-space: nowrap;
+  transition: ease 1000ms;
+}
+
+.slide {
+  display: inline-block;
+  height: 300px;
+  width: 100%;
+  border-radius: 10px;
+  margin: 0 auto;
+  /* border: solid 2px #6c816d; */
+  background-color: #f0c3c7;
+  overflow: hidden;
+}
+
+.slide-img {
+  height: 300px;
+  /* width: 300px; */
+}
+
+/* Buttons */
+
+.slideshowDots {
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 7px 0px;
+
+  background-color: #c4c4c4;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.slideshowDot.active {
+  background-color: #a38487;
 }
 
 .App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+  color: #6c816d;
+  background-color: #f5f8fa;
+  padding: 5px;
+  -webkit-box-shadow: 10px 18px 29px 0px rgba(0, 0, 0, 0.69);
+  -moz-box-shadow: 10px 18px 29px 0px rgba(0, 0, 0, 0.69);
+  box-shadow: 10px 18px 29px 0px rgba(0, 0, 0, 0.69);
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+a {
+  color: #a38487;
+}
+
+a.active,
+a:hover {
+  color: #6c816d;
+}
+
+.button {
+  color: #a38487;
+  border-color: #a38487;
+  background-color: #f0c3c7;
+}
+
+.button:hover {
   color: white;
+  border-color: #a38487;
+  background-color: #a38487;
 }
 
-.App-link {
-  color: #61dafb;
+.App-header h2,
+h3 {
+  color: #f0c3c7;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.menino {
+  color: #6c816d;
+}
+
+.menina {
+  color: #a38487;
 }
