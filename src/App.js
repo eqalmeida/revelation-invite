@@ -2,9 +2,12 @@ import "./App.css";
 import { useEffect, useState, useRef } from "react";
 import fotoBarriga from "./img/foto-barriga.jpeg";
 import fotoTesteGrav from "./img/imagem-teste-grav.jpeg";
-import fotoDiaTransf from "./img/imagem-tranf.jpeg";
+import fotoDiaTransf from "./img/imagem-transf.jpeg";
 import fotoUSG6sem from "./img/imagem-USG6sem.jpeg";
 import fotoUSG12sem from "./img/imagem-usg-12sem.jpeg";
+import fotoBarriga11sem from "./img/foto-barriga-11sem.jpeg";
+import musica from "./img/PedacinhoMeu.mp3";
+import papai from "./img/papai.jpeg";
 import { BrowserRouter as Router, useSearchParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -23,7 +26,15 @@ const slideImages = [
     caption: "Teste positivo",
   },
   {
+    url: papai,
+    caption: "Teste positivo",
+  },
+  {
     url: fotoUSG6sem,
+    caption: "Primeiro Ultrassom",
+  },
+  {
+    url: fotoBarriga11sem,
     caption: "Primeiro Ultrassom",
   },
   {
@@ -50,15 +61,39 @@ function App() {
 function Home() {
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
+  const audioRef = useRef(null);
   const [searchParams, _] = useSearchParams();
 
-  const name = searchParams.get("__name");
+  const nameBase64 = searchParams.get("__name");
+  const name = nameBase64 ? atob(nameBase64) : null;
 
   function resetTimeout() {
     if (timeoutRef.current) {
       clearTimeout(timeoutRef.current);
     }
   }
+
+  const playAudio = () => {
+    audioRef.current.volume = 0.01;
+    audioRef.current.play();
+    window.removeEventListener("keydown", playAudio);
+    window.removeEventListener("mousedown", playAudio);
+    window.removeEventListener("touchstart", playAudio);
+    console.log("PLAY");
+  };
+
+  const pauseAudio = () => {
+    if (audioRef.current) {
+      audioRef.current.pause();
+      console.log("PAUSE");
+    }
+  };
+
+  useEffect(() => {
+    window.addEventListener("keydown", playAudio);
+    window.addEventListener("mousedown", playAudio);
+    window.addEventListener("touchstart", playAudio);
+  }, []);
 
   useEffect(() => {
     resetTimeout();
@@ -88,9 +123,9 @@ function Home() {
           <h4>
             Mery e Eduardo te convidam para esse momento tão especial, onde
             descobriremos juntos o sexo de nosso bebê. Contamos muito com sua
-            presença para participar desse momento mágico.
+            presença.
           </h4>
-          <div className="slideshow">
+          <div className="slideshow mt-3">
             <div
               className="slideshowSlider"
               style={{ transform: `translate3d(${-index * 100}%, 0, 0)` }}
@@ -114,11 +149,13 @@ function Home() {
               ))}
             </div>
           </div>
+          <audio ref={audioRef} src={musica} controls></audio>
           <hr></hr>
+
           <div>
             <p style={{ fontSize: 24 }}>
               <FontAwesomeIcon icon={faCalendarDay} />
-              <span className="mx-2">Dia 06 de Agosto de 2022</span>
+              <span className="mx-2">Dia 06 de Agosto de 2022 - 16:00h</span>
             </p>
             <p style={{ fontSize: 18 }}>
               <FontAwesomeIcon icon={faMapLocation} />
