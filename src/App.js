@@ -1,10 +1,11 @@
+import "./App.css";
+import { useEffect, useState, useRef } from "react";
 import fotoBarriga from "./img/foto-barriga.jpeg";
 import fotoTesteGrav from "./img/imagem-teste-grav.jpeg";
 import fotoDiaTransf from "./img/imagem-tranf.jpeg";
 import fotoUSG6sem from "./img/imagem-USG6sem.jpeg";
 import fotoUSG12sem from "./img/imagem-usg-12sem.jpeg";
-import "./App.css";
-import { useEffect, useState, useRef } from "react";
+import { BrowserRouter as Router, useSearchParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -39,8 +40,19 @@ const nomeMenina = "Girl";
 const nomeMenino = "Boy";
 
 function App() {
+  return (
+    <Router>
+      <Home />
+    </Router>
+  );
+}
+
+function Home() {
   const [index, setIndex] = useState(0);
   const timeoutRef = useRef(null);
+  const [searchParams, _] = useSearchParams();
+
+  const name = searchParams.get("__name");
 
   function resetTimeout() {
     if (timeoutRef.current) {
@@ -67,11 +79,17 @@ function App() {
         <header className="App-header">
           <h2>CONVITE</h2>
           <h1 style={{ fontSize: 48 }}>Chá revelação</h1>
-          <h2>
+          <h1>
             <span className="menino">{nomeMenino}</span> ou{" "}
             <span className="menina">{nomeMenina}</span>?
-          </h2>
-          <h4>Vamos descobrir juntos</h4>
+          </h1>
+          <hr></hr>
+          {name && <h3 style={{ fontSize: 30 }}>Olá, {name}</h3>}
+          <h4>
+            Mery e Eduardo te convidam para esse momento tão especial, onde
+            descobriremos juntos o sexo de nosso bebê. Contamos muito com sua
+            presença para participar desse momento mágico.
+          </h4>
           <div className="slideshow">
             <div
               className="slideshowSlider"
@@ -98,11 +116,6 @@ function App() {
           </div>
           <hr></hr>
           <div>
-            <p>
-              Mery e Eduardo te convidam para esse momento tão especial, onde
-              descobriremos juntos o sexo de nosso bebê. Contamos muito com sua
-              presença para participar desse momento mágico.
-            </p>
             <p style={{ fontSize: 24 }}>
               <FontAwesomeIcon icon={faCalendarDay} />
               <span className="mx-2">Dia 06 de Agosto de 2022</span>
@@ -118,7 +131,7 @@ function App() {
             <Button
               className="my-3 button"
               variant="outline-primary"
-              href="https://forms.gle/yTzqZ7YppGsXLMS28"
+              href={`https://docs.google.com/forms/d/e/1FAIpQLScN8tSN3QuQ7VlAiGuvg2j9fxYjOOq4CE1Lwf2iIRgw6uMlMw/viewform?usp=pp_url&entry.269541413=${name}`}
             >
               Confirme sua presença
             </Button>
