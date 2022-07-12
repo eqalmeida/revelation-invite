@@ -7,6 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapLocation,
   faCalendarDay,
+  faPlay,
+  faPause,
+  faStop,
+  faToggleOn,
+  faCheckCircle,
+  faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import SlideImages from "./components/SlideImages";
 import { Howl, Howler } from "howler";
@@ -87,7 +93,10 @@ function Home() {
             variant="outline-primary"
             onClick={pausarMusica}
           >
-            {mutted || !playing ? "TOCAR MÚSICA" : "PARAR MÚSICA"}
+            <FontAwesomeIcon icon={mutted || !playing ? faPlay : faPause} />
+            <span className="ms-3">
+              {mutted || !playing ? "TOCAR MÚSICA" : "PARAR MÚSICA"}
+            </span>
           </Button>
 
           <hr></hr>
@@ -97,23 +106,25 @@ function Home() {
               <FontAwesomeIcon icon={faCalendarDay} />
               <span className="mx-2">Dia 06 de Agosto de 2022 - 16:00h</span>
             </p>
-            <p style={{ fontSize: 18 }}>
+            <div>
+              <Button
+                size="lg"
+                className="my-2 button"
+                variant="outline-primary"
+                href={`https://docs.google.com/forms/d/e/1FAIpQLScN8tSN3QuQ7VlAiGuvg2j9fxYjOOq4CE1Lwf2iIRgw6uMlMw/viewform?usp=pp_url&entry.269541413=${
+                  name || ""
+                }`}
+              >
+                <FontAwesomeIcon icon={faCalendarCheck} className="me-3" />
+                Clique para confirmar sua presença
+              </Button>
+            </div>
+            <p style={{ fontSize: 18 }} className="mt-2">
               <FontAwesomeIcon icon={faMapLocation} />
               <a className="mx-2" href="https://goo.gl/maps/zMwQfCpCxgSEYWgC6">
                 Rua Tapuias, 120 - Socorro - São Paulo
               </a>
             </p>
-          </div>
-          <div>
-            <Button
-              className="my-3 button"
-              variant="outline-primary"
-              href={`https://docs.google.com/forms/d/e/1FAIpQLScN8tSN3QuQ7VlAiGuvg2j9fxYjOOq4CE1Lwf2iIRgw6uMlMw/viewform?usp=pp_url&entry.269541413=${
-                name || ""
-              }`}
-            >
-              Confirme sua presença
-            </Button>
           </div>
         </header>
       </div>
