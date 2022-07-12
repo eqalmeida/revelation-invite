@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import musica from "./img/PedacinhoMeu.mp3";
 import { BrowserRouter as Router, useSearchParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -9,6 +9,7 @@ import {
   faCalendarDay,
 } from "@fortawesome/free-solid-svg-icons";
 import SlideImages from "./components/SlideImages";
+import { Howl, Howler } from "howler";
 
 const nomeMenina = "Girl";
 const nomeMenino = "Boy";
@@ -22,29 +23,42 @@ function App() {
 }
 
 function Home() {
-  const audioRef = useRef(null);
   const [searchParams] = useSearchParams();
+
+  const [mutted, setMutted] = useState(false);
+  const [playing, setPlaying] = useState(false);
 
   const nameBase64 = searchParams.get("__name");
   const name = nameBase64 ? atob(nameBase64) : null;
 
-  const playAudio = () => {
-    if (audioRef) {
-      audioRef.current.volume = 1.0;
-      audioRef.current.play();
-      window.removeEventListener("keydown", playAudio);
-      window.removeEventListener("mousedown", playAudio);
-      window.removeEventListener("touchstart", playAudio);
+  const sound = new Howl({
+    src: [musica],
+    loop: true,
+    onplayerror: function () {
+      sound.once("unlock", function () {
+        sound.play();
+      });
+    },
+    onplay: () => {
+      console.log("PLAYING");
+      setPlaying(true);
+    },
+  });
 
-      console.log("PLAY");
+  const pausarMusica = () => {
+    if (!playing) {
+      sound.play();
+      return;
     }
+
+    Howler.mute(!mutted);
+
+    setMutted(!mutted);
+    console.log(mutted);
   };
 
   useEffect(() => {
-    window.addEventListener("keydown", playAudio);
-    window.addEventListener("mousedown", playAudio);
-    window.addEventListener("touchstart", playAudio);
-
+    sound.play();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -67,7 +81,15 @@ function Home() {
           </h4>
 
           <SlideImages className="mt-3" />
-          <audio ref={audioRef} src={musica} controls></audio>
+
+          <Button
+            className="my-3 button"
+            variant="outline-primary"
+            onClick={pausarMusica}
+          >
+            {mutted || !playing ? "TOCAR MÚSICA" : "PARAR MÚSICA"}
+          </Button>
+
           <hr></hr>
 
           <div>
