@@ -74,12 +74,14 @@ function Home() {
   }
 
   const playAudio = () => {
-    audioRef.current.volume = 0.01;
-    audioRef.current.play();
-    window.removeEventListener("keydown", playAudio);
-    window.removeEventListener("mousedown", playAudio);
-    window.removeEventListener("touchstart", playAudio);
-    console.log("PLAY");
+    if (audioRef) {
+      audioRef.current.volume = 1.0;
+      audioRef.current.play();
+      window.removeEventListener("keydown", playAudio);
+      window.removeEventListener("mousedown", playAudio);
+      window.removeEventListener("touchstart", playAudio);
+      console.log("PLAY");
+    }
   };
 
   const pauseAudio = () => {
@@ -122,7 +124,7 @@ function Home() {
           {name && <h3 style={{ fontSize: 30 }}>Olá, {name}</h3>}
           <h4>
             Mery e Eduardo te convidam para esse momento tão especial, onde
-            descobriremos juntos o sexo de nosso bebê. Contamos muito com sua
+            descobriremos juntos o sexo do nosso bebê. Contamos muito com sua
             presença.
           </h4>
           <div className="slideshow mt-3">
