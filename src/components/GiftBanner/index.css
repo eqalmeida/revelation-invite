@@ -1,0 +1,25 @@
+.gift-banner {
+  border: solid 2px #6c816d;
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #6c816d;
+  color: #fff;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.gift-banner-header {
+  background-color: #b9e4bb;
+  color: #414241;
+  padding: 6px;
+}
+
+.gift-banner ul {
+  display: inline-block;
+  margin: 5px auto;
+}
+
+.gift-banner li {
+  display: list-item;
+  font-size: 1.3rem;
+}

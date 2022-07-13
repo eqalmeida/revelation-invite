@@ -2,13 +2,13 @@ import React, { useEffect, useRef, useState } from "react";
 
 import "./SlideImages.css";
 
-import fotoBarriga from "../img/foto-barriga.jpeg";
-import fotoTesteGrav from "../img/imagem-teste-grav.jpeg";
-import fotoDiaTransf from "../img/imagem-transf.jpeg";
-import fotoUSG6sem from "../img/imagem-USG6sem.jpeg";
-import fotoUSG12sem from "../img/imagem-usg-12sem.jpeg";
-import fotoBarriga11sem from "../img/foto-barriga-11sem.jpeg";
-import papai from "../img/papai.jpeg";
+import fotoBarriga from "../../img/foto-barriga.jpeg";
+import fotoTesteGrav from "../../img/imagem-teste-grav.jpeg";
+import fotoDiaTransf from "../../img/imagem-transf.jpeg";
+import fotoUSG6sem from "../../img/imagem-USG6sem.jpeg";
+import fotoUSG12sem from "../../img/imagem-usg-12sem.jpeg";
+import fotoBarriga11sem from "../../img/foto-barriga-11sem.jpeg";
+import papai from "../../img/papai.jpeg";
 
 const slideImages = [
   {

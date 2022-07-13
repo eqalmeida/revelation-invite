@@ -9,13 +9,11 @@ import {
   faCalendarDay,
   faPlay,
   faPause,
-  faStop,
-  faToggleOn,
-  faCheckCircle,
   faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import SlideImages from "./components/SlideImages";
 import { Howl, Howler } from "howler";
+import GiftBanner from "./components/GiftBanner";
 
 const nomeMenina = "Girl";
 const nomeMenino = "Boy";
@@ -36,6 +34,9 @@ function Home() {
 
   const nameBase64 = searchParams.get("__name");
   const name = nameBase64 ? atob(nameBase64) : null;
+
+  const giftStr = searchParams.get("gift");
+  const giftList = giftStr ? atob(giftStr).split(";") : [];
 
   const sound = new Howl({
     src: [musica],
@@ -119,6 +120,11 @@ function Home() {
                 Clique para confirmar sua presença
               </Button>
             </div>
+
+            {giftList.length > 0 && (
+              <GiftBanner giftList={giftList} className="mt-1" />
+            )}
+
             <p style={{ fontSize: 18 }} className="mt-2">
               <FontAwesomeIcon icon={faMapLocation} />
               <a className="mx-2" href="https://goo.gl/maps/zMwQfCpCxgSEYWgC6">
