@@ -33,7 +33,7 @@ function Home() {
   const [playing, setPlaying] = useState(false);
 
   const nameBase64 = searchParams.get("__name");
-  const query = nameBase64 ? atob(nameBase64) : null;
+  const query = nameBase64 ? decodeURI(atob(nameBase64)) : null;
   const queryItems = query ? query.split(";") : [];
   const name = queryItems.length > 0 ? queryItems[0] : null;
 
