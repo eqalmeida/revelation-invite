@@ -6,12 +6,21 @@
   color: #fff;
   margin-left: 10px;
   margin-right: 10px;
+
+  -webkit-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 5px 5px 5px 0px rgba(0, 0, 0, 0.75);
 }
 
 .gift-banner-header {
-  background-color: #b9e4bb;
+  /* background-color: #b9e4bb; */
   color: #414241;
   padding: 6px;
+}
+
+.gift-banner-header {
+  color: white;
+  font-size: 1.5rem;
 }
 
 .gift-banner ul {

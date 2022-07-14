@@ -107,7 +107,7 @@ function Home() {
               <GiftBanner giftList={giftList} className="mt-1" />
             )}
 
-            <h4 className="mx-3">
+            <h4 className="mx-3 mt-2">
               Se você acha que será um menino venha de azul, se você acha que
               será uma menina venha de rosa.
             </h4>
