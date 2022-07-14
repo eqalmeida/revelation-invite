@@ -33,10 +33,11 @@ function Home() {
   const [playing, setPlaying] = useState(false);
 
   const nameBase64 = searchParams.get("__name");
-  const name = nameBase64 ? atob(nameBase64) : null;
+  const query = nameBase64 ? atob(nameBase64) : null;
+  const queryItems = query ? query.split(";") : [];
+  const name = queryItems.length > 0 ? queryItems[0] : null;
 
-  const giftStr = searchParams.get("gift");
-  const giftList = giftStr ? atob(giftStr).split(";") : [];
+  const giftList = queryItems.filter((_, index) => index > 0);
 
   const sound = new Howl({
     src: [musica],
