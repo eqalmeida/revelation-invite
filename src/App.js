@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import musica from "./img/PedacinhoMeu.mp3";
 import { BrowserRouter as Router, useSearchParams } from "react-router-dom";
 import Button from "react-bootstrap/Button";
@@ -7,12 +7,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faMapLocation,
   faCalendarDay,
-  faPlay,
-  faPause,
   faCalendarCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import SlideImages from "./components/SlideImages";
-import { Howl, Howler } from "howler";
 import GiftBanner from "./components/GiftBanner";
 
 const nomeMenina = "Girl";
@@ -28,9 +25,7 @@ function App() {
 
 function Home() {
   const [searchParams] = useSearchParams();
-
-  const [mutted, setMutted] = useState(false);
-  const [playing, setPlaying] = useState(false);
+  const musicaRef = useRef();
 
   const nameBase64 = searchParams.get("__name");
   const query = nameBase64 ? decodeURI(atob(nameBase64)) : null;
@@ -39,34 +34,25 @@ function Home() {
 
   const giftList = queryItems.filter((_, index) => index > 0);
 
-  const sound = new Howl({
-    src: [musica],
-    loop: true,
-    onplayerror: function () {
-      sound.once("unlock", function () {
-        sound.play();
-      });
-    },
-    onplay: () => {
-      console.log("PLAYING");
-      setPlaying(true);
-    },
-  });
+  const userEvents = ["click", "mousedown", "keydown", "touchstart"];
 
-  const pausarMusica = () => {
-    if (!playing) {
-      sound.play();
-      return;
+  const tryToStartMusic = () => {
+    if (musicaRef.current) {
+      musicaRef.current.play();
+      userEvents.forEach((e) => window.removeEventListener(e, tryToStartMusic));
     }
-
-    Howler.mute(!mutted);
-
-    setMutted(!mutted);
-    console.log(mutted);
   };
 
   useEffect(() => {
-    sound.play();
+    // sound.play();
+    userEvents.forEach((e) => window.addEventListener(e, tryToStartMusic));
+    if (musicaRef.current) {
+      musicaRef.current.play();
+    }
+
+    return () => {
+      userEvents.forEach((e) => window.removeEventListener(e, tryToStartMusic));
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -82,7 +68,7 @@ function Home() {
           </h1>
           <hr></hr>
           {name && <h3 style={{ fontSize: 30 }}>Olá, {name}</h3>}
-          <h4>
+          <h4 className="mx-3">
             Mery e Eduardo te convidam para esse momento tão especial, onde
             descobriremos juntos o sexo do nosso bebê. Contamos muito com sua
             presença.
@@ -90,16 +76,7 @@ function Home() {
 
           <SlideImages className="mt-3" />
 
-          <Button
-            className="my-3 button"
-            variant="outline-primary"
-            onClick={pausarMusica}
-          >
-            <FontAwesomeIcon icon={mutted || !playing ? faPlay : faPause} />
-            <span className="ms-3">
-              {mutted || !playing ? "TOCAR MÚSICA" : "PARAR MÚSICA"}
-            </span>
-          </Button>
+          <audio src={musica} ref={musicaRef} controls autoPlay loop />
 
           <hr></hr>
 
@@ -125,6 +102,11 @@ function Home() {
             {giftList.length > 0 && (
               <GiftBanner giftList={giftList} className="mt-1" />
             )}
+
+            <h4 className="mx-3">
+              Se você acha que será um menino venha de azul, se você acha que
+              será uma menina venha de rosa.
+            </h4>
 
             <p style={{ fontSize: 18 }} className="mt-2">
               <FontAwesomeIcon icon={faMapLocation} />
