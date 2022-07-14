@@ -23,12 +23,16 @@ function App() {
   );
 }
 
+function base64_decode(s) {
+  return decodeURIComponent(escape(atob(s)));
+}
+
 function Home() {
   const [searchParams] = useSearchParams();
   const musicaRef = useRef();
 
   const nameBase64 = searchParams.get("__name");
-  const query = nameBase64 ? decodeURI(atob(nameBase64)) : null;
+  const query = nameBase64 ? base64_decode(nameBase64) : null;
   const queryItems = query ? query.split(";") : [];
   const name = queryItems.length > 0 ? queryItems[0] : null;
 
