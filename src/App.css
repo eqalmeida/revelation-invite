@@ -10,6 +10,12 @@ body {
   width: 100vw;
   height: 100vh;
   padding-top: 20px;
+  background-image: linear-gradient(
+      to right,
+      rgba(80, 229, 255, 0.5),
+      rgba(248, 220, 239, 0.5)
+    ),
+    url("/public/bg.JPG");
 }
 
 .App-header {
@@ -55,4 +61,33 @@ h3 {
 
 .menina {
   color: #a38487;
+}
+
+.Modal.open {
+  animation: bounce-in 0.7s ease-in;
+  animation-fill-mode: both;
+}
+.Modal.close {
+  animation: bounce-out 0.3s ease-in;
+  animation-fill-mode: both;
+}
+@keyframes bounce-in {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+@keyframes bounce-out {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0);
+  }
 }

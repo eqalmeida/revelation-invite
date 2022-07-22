@@ -71,96 +71,103 @@ function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (!started) {
-    return (
-      <div
-        className="container"
-        style={{
-          textAlign: "center",
-        }}
-      >
-        <Button
-          size="lg"
-          className="my-2"
-          variant="primary"
-          onClick={verConvite}
-        >
-          <FontAwesomeIcon icon={faStar} />
-          <span className="mx-3">CLIQUE PARA VER O CONVITE</span>
-          <FontAwesomeIcon icon={faStar} />
-        </Button>
-      </div>
-    );
-  }
-
   return (
-    <div>
-      <div className="container" style={{ textAlign: "center" }}>
-        <header className="App-header">
-          <h2>CONVITE</h2>
-          <h1 style={{ fontSize: 48 }}>Chá revelação</h1>
-          <h1>
-            <span className="menino">{nomeMenino}</span> ou{" "}
-            <span className="menina">{nomeMenina}</span>?
-          </h1>
-          <hr></hr>
-          {name && <h3 style={{ fontSize: 30 }}>Olá, {name}</h3>}
-          <h4 className="mx-3">
-            Mery e Eduardo te convidam para esse momento tão especial, onde
-            descobriremos juntos o sexo do nosso bebê. Contamos muito com sua
-            presença.
-          </h4>
+    <div className="container">
+      {!started && (
+        <div
+          className={`Modal ${started ? "close" : "open"}`}
+          style={{
+            textAlign: "center",
+            paddingTop: 30,
+          }}
+        >
+          <Button
+            size="lg"
+            className="my-2"
+            variant="primary"
+            onClick={verConvite}
+          >
+            <FontAwesomeIcon icon={faStar} />
+            <span className="mx-3">CLIQUE PARA VER O CONVITE</span>
+            <FontAwesomeIcon icon={faStar} />
+          </Button>
+        </div>
+      )}
 
-          <SlideImages className="mt-3" />
-
-          <audio
-            src={musica}
-            ref={musicaRef}
-            volume={0.1}
-            controls
-            autoPlay
-            loop
-          />
-
-          <hr></hr>
-
-          <div>
-            <p style={{ fontSize: 24 }}>
-              <FontAwesomeIcon icon={faCalendarDay} />
-              <span className="mx-2">Dia 06 de Agosto de 2022 - 16:00h</span>
-            </p>
-            <div>
-              <Button
-                size="lg"
-                className="my-2 button"
-                variant="outline-primary"
-                href={`https://docs.google.com/forms/d/e/1FAIpQLScN8tSN3QuQ7VlAiGuvg2j9fxYjOOq4CE1Lwf2iIRgw6uMlMw/viewform?usp=pp_url&entry.269541413=${
-                  name || ""
-                }`}
-              >
-                <FontAwesomeIcon icon={faCalendarCheck} className="me-3" />
-                Clique para confirmar sua presença
-              </Button>
-            </div>
-
-            {giftList.length > 0 && (
-              <GiftBanner giftList={giftList} className="mt-1" />
-            )}
-
-            <h4 className="mx-3 mt-2">
-              Se você acha que será um menino venha de azul, se você acha que
-              será uma menina venha de rosa.
+      {started && (
+        <div
+          className={`Modal ${started ? "open" : "close"}`}
+          style={{ textAlign: "center", paddingBottom: 30 }}
+        >
+          <header className="App-header">
+            <h2>CONVITE</h2>
+            <h1 style={{ fontSize: 48 }}>Chá revelação</h1>
+            <h1>
+              <span className="menino">{nomeMenino}</span> ou{" "}
+              <span className="menina">{nomeMenina}</span>?
+            </h1>
+            <hr></hr>
+            {name && <h3 style={{ fontSize: 30 }}>Olá, {name}</h3>}
+            <h4 className="mx-3">
+              Mery e Eduardo te convidam para esse momento tão especial, onde
+              descobriremos juntos o sexo do nosso bebê. Contamos muito com sua
+              presença.
             </h4>
 
-            <p style={{ fontSize: 18 }} className="mt-2">
-              <FontAwesomeIcon icon={faMapLocation} />
-              <a className="mx-2" href="https://goo.gl/maps/zMwQfCpCxgSEYWgC6">
-                Rua Tapuias, 120 - Socorro - São Paulo
-              </a>
-            </p>
-          </div>
-        </header>
-      </div>
+            <SlideImages className="mt-3" />
+
+            <audio
+              src={musica}
+              ref={musicaRef}
+              volume={0.1}
+              controls
+              autoPlay
+              loop
+            />
+
+            <hr></hr>
+
+            <div>
+              <p style={{ fontSize: 24 }}>
+                <FontAwesomeIcon icon={faCalendarDay} />
+                <span className="mx-2">Dia 06 de Agosto de 2022 - 16:00h</span>
+              </p>
+              <div>
+                <Button
+                  size="lg"
+                  className="my-2 button"
+                  variant="outline-primary"
+                  href={`https://docs.google.com/forms/d/e/1FAIpQLScN8tSN3QuQ7VlAiGuvg2j9fxYjOOq4CE1Lwf2iIRgw6uMlMw/viewform?usp=pp_url&entry.269541413=${
+                    name || ""
+                  }`}
+                >
+                  <FontAwesomeIcon icon={faCalendarCheck} className="me-3" />
+                  Clique para confirmar sua presença
+                </Button>
+              </div>
+
+              {giftList.length > 0 && (
+                <GiftBanner giftList={giftList} className="mt-1" />
+              )}
+
+              <h4 className="mx-3 mt-2">
+                Se você acha que será um menino venha de azul, se você acha que
+                será uma menina venha de rosa.
+              </h4>
+
+              <p style={{ fontSize: 18 }} className="mt-2">
+                <FontAwesomeIcon icon={faMapLocation} />
+                <a
+                  className="mx-2"
+                  href="https://goo.gl/maps/zMwQfCpCxgSEYWgC6"
+                >
+                  Rua Tapuias, 120 - Socorro - São Paulo
+                </a>
+              </p>
+            </div>
+          </header>
+        </div>
+      )}
     </div>
   );
 }
