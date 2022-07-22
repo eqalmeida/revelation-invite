@@ -41,7 +41,11 @@ function Home() {
   const queryItems = query ? query.split(";") : [];
   const name = queryItems.length > 0 ? queryItems[0] : null;
 
-  const giftList = queryItems.filter((_, index) => index > 0);
+  const giftList = queryItems
+    .filter((_, index) => index > 0)
+    .map((x) => {
+      return x.replace("1 pct fraldas", "1 pacote de fraldas");
+    });
 
   const userEvents = ["click", "mousedown", "keydown", "touchstart"];
 
