@@ -8,6 +8,10 @@ import {
   faMapLocation,
   faCalendarDay,
   faCalendarCheck,
+  faFileInvoice,
+  faHeart,
+  faStairs,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import SlideImages from "./components/SlideImages";
 import GiftBanner from "./components/GiftBanner";
@@ -30,6 +34,7 @@ function base64_decode(s) {
 function Home() {
   const [searchParams] = useSearchParams();
   const musicaRef = useRef();
+  const [started, setStarted] = useState(false);
 
   const nameBase64 = searchParams.get("__name");
   const query = nameBase64 ? base64_decode(nameBase64) : null;
@@ -42,9 +47,15 @@ function Home() {
 
   const tryToStartMusic = () => {
     if (musicaRef.current) {
+      musicaRef.current.volume = 0.3;
       musicaRef.current.play();
       userEvents.forEach((e) => window.removeEventListener(e, tryToStartMusic));
     }
+  };
+
+  const verConvite = () => {
+    setStarted(true);
+    tryToStartMusic();
   };
 
   useEffect(() => {
@@ -59,6 +70,28 @@ function Home() {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  if (!started) {
+    return (
+      <div
+        className="container"
+        style={{
+          textAlign: "center",
+        }}
+      >
+        <Button
+          size="lg"
+          className="my-2"
+          variant="primary"
+          onClick={verConvite}
+        >
+          <FontAwesomeIcon icon={faStar} />
+          <span className="mx-3">CLIQUE PARA VER O CONVITE</span>
+          <FontAwesomeIcon icon={faStar} />
+        </Button>
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -80,7 +113,14 @@ function Home() {
 
           <SlideImages className="mt-3" />
 
-          <audio src={musica} ref={musicaRef} controls autoPlay loop />
+          <audio
+            src={musica}
+            ref={musicaRef}
+            volume={0.1}
+            controls
+            autoPlay
+            loop
+          />
 
           <hr></hr>
 

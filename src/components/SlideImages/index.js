@@ -10,6 +10,13 @@ import fotoUSG12sem from "../../img/imagem-usg-12sem.jpeg";
 import fotoBarriga11sem from "../../img/foto-barriga-11sem.jpeg";
 import papai from "../../img/papai.jpeg";
 
+import fotoParque01 from "../../img/foto-parque01.jpeg";
+import fotoParque02 from "../../img/foto-parque02.jpeg";
+import fotoParque03 from "../../img/foto-parque03.jpeg";
+import fotoParque04 from "../../img/foto-parque04.jpeg";
+import fotoParque05 from "../../img/foto-parque05.jpeg";
+import fotoParque06 from "../../img/foto-parque06.jpeg";
+
 const slideImages = [
   {
     url: fotoDiaTransf,
@@ -37,7 +44,31 @@ const slideImages = [
   },
   {
     url: fotoBarriga,
-    caption: "Transferência de embrião",
+    caption: "",
+  },
+  {
+    url: fotoParque05,
+    caption: "",
+  },
+  {
+    url: fotoParque06,
+    caption: "",
+  },
+  {
+    url: fotoParque01,
+    caption: "",
+  },
+  {
+    url: fotoParque02,
+    caption: "",
+  },
+  {
+    url: fotoParque03,
+    caption: "",
+  },
+  {
+    url: fotoParque04,
+    caption: "",
   },
 ];
 
