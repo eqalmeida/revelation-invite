@@ -54,10 +54,10 @@ const slideImages = [
     url: fotoParque06,
     caption: "",
   },
-  {
-    url: fotoParque01,
-    caption: "",
-  },
+  // {
+  //   url: fotoParque01,
+  //   caption: "",
+  // },
   {
     url: fotoParque02,
     caption: "",
@@ -66,10 +66,10 @@ const slideImages = [
     url: fotoParque03,
     caption: "",
   },
-  {
-    url: fotoParque04,
-    caption: "",
-  },
+  // {
+  //   url: fotoParque04,
+  //   caption: "",
+  // },
 ];
 
 export default function SlideImages() {
